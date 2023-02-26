@@ -1,14 +1,27 @@
+
 import 'package:facebook_clone/components/screen_components/screen_component.dart';
+import 'package:facebook_clone/models/post_model.dart';
 import 'package:flutter/material.dart';
 
+List<PostModel> posts = [ PostModel(userN: "Spiderman", userI: "https://i.pinimg.com/236x/a4/29/e6/a429e62cf5e9dac82e37ddec94d20017.jpg", date: "12:08 AM" , text: "This is the darken one", img: "https://i.pinimg.com/564x/e2/17/53/e2175374a7dab9ab77480806f9bca376.jpg"),
+  PostModel(userN: "Teemo", userI: "https://i.pinimg.com/564x/a5/38/75/a53875cb99670c9d08bbcd2e7b1e7961.jpg", date: "12:30 AM" , text: "I'm so toxic", img: "https://i.pinimg.com/236x/fd/30/8d/fd308d7bacc26a8e41c8da94da180cbe.jpg"),
+  PostModel(userN: "Yasuo", userI: "https://i.pinimg.com/564x/48/24/03/48240348015efb45e8037ca7b457a175.jpg", date: "12:48 AM" , text: "HASAGIIIII!!", img: "https://i.pinimg.com/564x/ec/a5/08/eca5086c9bf6028baad550c5e8cc7b60.jpg"),
+  PostModel(userN: "Yone", userI: "https://i.pinimg.com/236x/63/c0/4f/63c04f9c7d7bf9befee03e142de49574.jpg", date: "2:00 AM" , text: "Brother The God must listen to reason ,you must!", img: "https://i.pinimg.com/564x/c1/cc/8a/c1cc8a40e19be5c7da4b2b9aeeda0b4e.jpg"),
+];
+
+
 class home_screen extends StatefulWidget {
-  const home_screen({Key? key}) : super(key: key);
+  home_screen({Key? key}) : super(key: key);
 
   @override
   State<home_screen> createState() => _home_screenState();
 }
 
 class _home_screenState extends State<home_screen> {
+
+@override
+
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -117,7 +130,7 @@ class _home_screenState extends State<home_screen> {
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: cardBuilder,
-                    itemCount: 10,
+                    itemCount: posts.length,
 
                   ),
                 ],
@@ -176,36 +189,66 @@ Widget storyBuilder (BuildContext context,int index)=>Stack(
 Widget cardBuilder (BuildContext context,int index)=>Column(
   crossAxisAlignment: CrossAxisAlignment.start,
   children: [
-    Padding(
-      padding: const EdgeInsets.only(left: 5,right: 5),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ListTile(
-            leading: ClipOval(
-              child: Image.network("https://i.pinimg.com/236x/a4/29/e6/a429e62cf5e9dac82e37ddec94d20017.jpg",
-                width: 45,
-                height: 45,
-                fit: BoxFit.cover,
-              ),
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ListTile(
+          leading: ClipOval(
+            child: Image.network("${posts[index].userI}",
+              width: 45,
+              height: 45,
+              fit: BoxFit.cover,
             ),
-            title: Text("Spiderman",style: TextStyle(color: inIcon),),
-            subtitle: Row(
-              children: [
-                Text("Just now"),
-                Icon(Icons.group),
-              ],
-            ),
-            trailing: IconButton(onPressed: (){}, icon: Icon(Icons.more_horiz)),
-            //onTap: ,
-
           ),
-          Text("This is Darken one ;}"),
+          title: Text("${posts[index].userN}",style: TextStyle(color: inIcon),),
+          subtitle: Row(
+            children: [
+              Text("${posts[index].date}"),
+              Icon(Icons.group),
+            ],
+          ),
+          trailing: IconButton(onPressed: (){}, icon: Icon(Icons.more_horiz)),
+          //onTap: ,
+
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left:11.0),
+          child: Text("${posts[index].text}"),
+        ),
+      ],
+    ),
+    SizedBox(height: 10,),
+    Image.network("${posts[index].img}",width: double.infinity,fit: BoxFit.cover,),
+
+    Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          Expanded(child: Container(
+              height: 40,
+              decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.3),
+                  borderRadius: BorderRadius.circular(10)
+              ),
+              child: Icon(Icons.favorite_outline_outlined,color: pressed,))),
+          SizedBox(width: 5,),
+          Expanded(child: Container(
+              height: 40,
+              decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.3),
+                  borderRadius: BorderRadius.circular(10)
+              ),
+              child: Icon(Icons.mode_comment_outlined,color: pressed,))),
+          SizedBox(width: 5,),
+          Expanded(child: Container(height: 40,
+              decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.3),
+                  borderRadius: BorderRadius.circular(10)
+              ),
+              child: Icon(Icons.share,color: pressed,))),
         ],
       ),
     ),
-    SizedBox(height: 10,),
-    Image.network("https://i.pinimg.com/564x/e2/17/53/e2175374a7dab9ab77480806f9bca376.jpg",width: double.infinity,fit: BoxFit.cover,)
   ],
 );
 //https://i.pinimg.com/236x/a4/29/e6/a429e62cf5e9dac82e37ddec94d20017.jpg
