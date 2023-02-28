@@ -139,7 +139,33 @@ class _home_screenState extends State<home_screen> {
             Text("data"),
             Text("data"),
             Text("data"),
-            Text("data"),
+            Column(
+              children: [
+                ListTile(
+                  leading: ClipOval(
+                    child: Image.network("${posts[0].userI}",
+                      fit: BoxFit.cover,
+                      height: 45,
+                      width: 45,
+                    ),
+                  ),
+                  title: Text("${posts[0].userN}"),
+                  subtitle: Text("See more"),
+                ),
+                InkWell(
+                  onTap: (){
+
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.dark_mode,),
+                      Text("Dark Mode",style: TextStyle(fontWeight: FontWeight.bold),),
+                    ],
+                  ),
+                ),
+
+              ],
+            ),
           ],
         ),
       ),

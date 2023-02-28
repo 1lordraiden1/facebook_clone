@@ -1,6 +1,6 @@
 # facebook_clone
 
-A new Flutter project.
+This is a facebook clone UI made by me 
 
 ## Getting Started
 
