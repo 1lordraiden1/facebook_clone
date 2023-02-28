@@ -2,6 +2,15 @@
 
 This is a facebook clone UI made by me 
 
+
+# Home Page
+
+Started with the main caller
+
+only lib flutter material used in this screen
+
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
