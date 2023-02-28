@@ -3,6 +3,8 @@ import 'package:facebook_clone/components/screen_components/screen_component.dar
 import 'package:facebook_clone/models/post_model.dart';
 import 'package:flutter/material.dart';
 
+bool isLike = false;
+
 List<PostModel> posts = [ PostModel(userN: "Spiderman", userI: "https://i.pinimg.com/236x/a4/29/e6/a429e62cf5e9dac82e37ddec94d20017.jpg", date: "12:08 AM" , text: "This is the darken one", img: "https://i.pinimg.com/564x/e2/17/53/e2175374a7dab9ab77480806f9bca376.jpg"),
   PostModel(userN: "Teemo", userI: "https://i.pinimg.com/564x/a5/38/75/a53875cb99670c9d08bbcd2e7b1e7961.jpg", date: "12:30 AM" , text: "I'm so toxic", img: "https://i.pinimg.com/236x/fd/30/8d/fd308d7bacc26a8e41c8da94da180cbe.jpg"),
   PostModel(userN: "Yasuo", userI: "https://i.pinimg.com/564x/48/24/03/48240348015efb45e8037ca7b457a175.jpg", date: "12:48 AM" , text: "HASAGIIIII!!", img: "https://i.pinimg.com/564x/ec/a5/08/eca5086c9bf6028baad550c5e8cc7b60.jpg"),
@@ -11,7 +13,7 @@ List<PostModel> posts = [ PostModel(userN: "Spiderman", userI: "https://i.pinimg
 
 
 class home_screen extends StatefulWidget {
-  home_screen({Key? key}) : super(key: key);
+  const home_screen({Key? key}) : super(key: key);
 
   @override
   State<home_screen> createState() => _home_screenState();
@@ -29,11 +31,18 @@ class _home_screenState extends State<home_screen> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: outIcon,
-          title: const Text("Facebook",
-          style: TextStyle(
-            color: Colors.blue,
-            fontWeight: FontWeight.bold,
-          ),
+          title: InkWell(
+            onTap: (){
+              setState(() {
+
+              });
+            },
+            child: const Text("Facebook",
+            style: TextStyle(
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+            ),
           ),
           actions: [
             CircleAvatar(
@@ -95,7 +104,7 @@ class _home_screenState extends State<home_screen> {
                         scrollDirection: Axis.horizontal,
                         itemCount: 20,
                         separatorBuilder: (context,index)=>SizedBox(width: 5,),
-                        itemBuilder: storyBuilder
+                        itemBuilder: storyBuilder,
                     ),
                   ),
                   Container(height: 10,color: outIcon,),
@@ -128,9 +137,81 @@ class _home_screenState extends State<home_screen> {
                   ),
                   ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: cardBuilder,
                     itemCount: posts.length,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context,index)=>Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ListTile(
+                              leading: ClipOval(
+                                child: Image.network("${posts[index].userI}",
+                                  width: 45,
+                                  height: 45,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              title: Text("${posts[index].userN}",style: TextStyle(color: inIcon),),
+                              subtitle: Row(
+                                children: [
+                                  Text("${posts[index].date}"),
+                                  Icon(Icons.group),
+                                ],
+                              ),
+                              trailing: IconButton(onPressed: (){}, icon: Icon(Icons.more_horiz)),
+                              //onTap: ,
+
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left:11.0),
+                              child: Text("${posts[index].text}"),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10,),
+                        Image.network("${posts[index].img}",width: double.infinity,fit: BoxFit.cover,),
+
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Expanded(child: InkWell(
+                                onTap : (){
+                                  setState(() {
+                                    isLike = !isLike;
+
+                                  });
+                                },
+                                child: Container(
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey.withOpacity(0.3),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: isLike ? Icon(Icons.favorite,color:Colors.blue) : Icon(Icons.favorite_outline_outlined,color: Colors.grey), ),
+                              )),
+                              SizedBox(width: 5,),
+                              Expanded(child: Container(
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey.withOpacity(0.3),
+                                      borderRadius: BorderRadius.circular(10)
+                                  ),
+                                  child: Icon(Icons.mode_comment_outlined,color: pressed,))),
+                              SizedBox(width: 5,),
+                              Expanded(child: Container(height: 40,
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey.withOpacity(0.3),
+                                      borderRadius: BorderRadius.circular(10)
+                                  ),
+                                  child: Icon(Icons.share,color: pressed,))),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
 
                   ),
                 ],
@@ -181,7 +262,7 @@ Widget storyBuilder (BuildContext context,int index)=>Stack(
           borderRadius: BorderRadius.circular(12),
           image: DecorationImage(
             image: NetworkImage(
-                "https://i.pinimg.com/236x/7c/49/a0/7c49a0766f9c0c320d144afd38bbaa75.jpg"
+                "https://i.pinimg.com/236x/7c/49/a0/7c49a0766f9c0c320d144afd38bbaa75.jpg",
             ),
             fit: BoxFit.cover,
           )
@@ -254,7 +335,7 @@ Widget cardBuilder (BuildContext context,int index)=>Column(
               height: 40,
               decoration: BoxDecoration(
                   color: Colors.grey.withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(10)
+                  borderRadius: BorderRadius.circular(10),
               ),
               child: Icon(Icons.favorite_outline_outlined,color: pressed,))),
           SizedBox(width: 5,),
