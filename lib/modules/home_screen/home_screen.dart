@@ -199,14 +199,14 @@ class _home_screenState extends State<home_screen> {
                                       color: Colors.grey.withOpacity(0.3),
                                       borderRadius: BorderRadius.circular(10)
                                   ),
-                                  child: Icon(Icons.mode_comment_outlined,color: pressed,))),
+                                  child: Icon(Icons.mode_comment_outlined,color: notPressed,))),
                               SizedBox(width: 5,),
                               Expanded(child: Container(height: 40,
                                   decoration: BoxDecoration(
                                       color: Colors.grey.withOpacity(0.3),
                                       borderRadius: BorderRadius.circular(10)
                                   ),
-                                  child: Icon(Icons.share,color: pressed,))),
+                                  child: Icon(Icons.share,color: notPressed,))),
                             ],
                           ),
                         ),
@@ -293,6 +293,8 @@ Widget storyBuilder (BuildContext context,int index)=>Stack(
   ],
 );
 
+//https://i.pinimg.com/236x/a4/29/e6/a429e62cf5e9dac82e37ddec94d20017.jpg
+/*
 Widget cardBuilder (BuildContext context,int index)=>Column(
   crossAxisAlignment: CrossAxisAlignment.start,
   children: [
@@ -345,17 +347,18 @@ Widget cardBuilder (BuildContext context,int index)=>Column(
                   color: Colors.grey.withOpacity(0.3),
                   borderRadius: BorderRadius.circular(10)
               ),
-              child: Icon(Icons.mode_comment_outlined,color: pressed,))),
+              child: Icon(Icons.mode_comment_outlined,color: notPressed,))),
           SizedBox(width: 5,),
           Expanded(child: Container(height: 40,
               decoration: BoxDecoration(
                   color: Colors.grey.withOpacity(0.3),
                   borderRadius: BorderRadius.circular(10)
               ),
-              child: Icon(Icons.share,color: pressed,))),
+              child: Icon(Icons.share,color: notPressed,))),
         ],
       ),
     ),
   ],
 );
-//https://i.pinimg.com/236x/a4/29/e6/a429e62cf5e9dac82e37ddec94d20017.jpg
+
+* */
