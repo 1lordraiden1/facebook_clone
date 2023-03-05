@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../models/post_model.dart';
-
+bool isDark = false;
 bool clr = false;
 Color? inIcon = Colors.black;
 Color? outIcon = Colors.white;
 Color? splIcon = Colors.blue;
-Color? notPressed = Colors.black.withOpacity(0.5);
+Color? greyhid = Colors.grey.withOpacity(0.3);
+Color? notPressed = Colors.grey;
 Color? pressed = Colors.blue;

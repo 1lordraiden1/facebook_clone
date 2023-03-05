@@ -4,6 +4,7 @@ class PostModel{
   String? date;
   String? text;
   String? img;
+  bool isLike;
 
   PostModel({
     required this.userN,
@@ -11,6 +12,7 @@ class PostModel{
     required this.date,
     required this.text,
     required this.img,
+    this.isLike = false,
 });
 
 
